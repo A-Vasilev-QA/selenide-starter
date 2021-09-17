@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SelenideSearch {
+
     @Test
     void shouldFindSelenideRepositoryPage() {
         //Открыть страницу github.com
