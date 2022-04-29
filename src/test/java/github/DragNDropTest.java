@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class DragNDropTest {
     @Test
     public void userCanDragNDropTest() {
-        Configuration.startMaximized = true;
+        Configuration.browserSize = "1920x1080";
         //Откройте https://the-internet.herokuapp.com/drag_and_drop
         open("https://the-internet.herokuapp.com/drag_and_drop");
         // - Перенесите прямоугольник А на место В

@@ -1,10 +1,10 @@
 package selenide;
 
 import com.codeborne.selenide.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
 
 import java.io.*;
-import java.time.*;
+import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.empty;
@@ -18,13 +18,16 @@ public class Snippets {
     void browser_command_examples() {
 
         open("https://google.com");
-        open("/customer/orders");
-        open("/", AuthenticationType.BASIC, "user", "password");
+        open("/customer/orders");     // -Dselenide.baseUrl=http://123.23.23.1
+        open("/", AuthenticationType.BASIC,
+                new BasicAuthCredentials("user", "password"));
 
         Selenide.back();
+        Selenide.refresh();
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
+        executeJavaScript("sessionStorage.clear();"); // no Selenide command for this yet
 
         Selenide.confirm(); // OK in alert dialogs
         Selenide.dismiss(); // Cancel in alert dialogs
@@ -50,10 +53,15 @@ public class Snippets {
         $(byText("full text")).click();
         $(withText("ull tex")).click();
 
-        $("").parent();       // find parent element
-        $("").sibling(2);     // find down third sibling element
-        $("").preceding(0);   // find up first sibling element
-        $("").closest("div"); // find up the tree the next element with tag
+        $(byTagAndText("div","full text"));
+        $(withTagAndText("div","ull text"));
+
+        $("").parent();
+        $("").sibling(1);
+        $("").preceding(1);
+        $("").closest("div");
+        $("").ancestor("div"); // the same as closest
+        $("div:last-child");
 
         $("div").$("h1").find(byText("abc")).click();
 
@@ -78,7 +86,8 @@ public class Snippets {
         $("").setValue("text");
         $("").append("text");
         $("").clear();
-        //
+        $("").setValue(""); // clear
+
         $("div").sendKeys("c"); // hotkey c on element
         actions().sendKeys("c").perform(); //hotkey c on whole application
         actions().sendKeys(Keys.chord(Keys.CONTROL, "f")).perform(); // Ctrl + F
@@ -87,6 +96,7 @@ public class Snippets {
         $("").pressEnter();
         $("").pressEscape();
         $("").pressTab();
+
 
         // complex actions with keybord and mouse, example
         actions().moveToElement($("div")).clickAndHold().moveByOffset(300, 200).release().perform();
@@ -108,7 +118,7 @@ public class Snippets {
 
         //longer timeouts
         $("").shouldBe(visible, Duration.ofSeconds(30));
-        $("").waitUntil(visible, 30000);  //is deprecated
+
 
     }
 
@@ -176,6 +186,7 @@ public class Snippets {
         $$("").shouldHave(sizeLessThan(3));
         $$("").shouldHave(sizeLessThanOrEqual(2));
 
+
     }
 
     void file_operation_examples() throws FileNotFoundException {
@@ -194,5 +205,6 @@ public class Snippets {
         executeJavaScript("alert('selenide')");
         executeJavaScript("alert(arguments[0]+arguments[1])", "abc", 12);
         long fortytwo = executeJavaScript("return arguments[0]*arguments[1];", 6, 7);
+
     }
 }
