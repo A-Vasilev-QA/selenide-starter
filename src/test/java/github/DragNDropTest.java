@@ -14,9 +14,10 @@ public class DragNDropTest {
         //Откройте https://the-internet.herokuapp.com/drag_and_drop
         open("https://the-internet.herokuapp.com/drag_and_drop");
         // - Перенесите прямоугольник А на место В
-        $(byText("A")).parent().dragAndDropTo($(byText("B")).parent());
+        $("#column-a").dragAndDropTo($("#column-b"));
         sleep(300);
         // - Проверьте, что прямоугольники действительно поменялись
         $("#column-a header").shouldHave(text("B"));
+        $("#column-b header").shouldHave(text("A"));
     }
 }
