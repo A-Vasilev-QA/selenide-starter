@@ -11,12 +11,12 @@ public class DragNDropTest {
     @Test
     public void userCanDragNDropTest() {
         Configuration.browserSize = "1920x1080";
-        //Откройте https://the-internet.herokuapp.com/drag_and_drop
+        // Open https://the-internet.herokuapp.com/drag_and_drop
         open("https://the-internet.herokuapp.com/drag_and_drop");
-        // - Перенесите прямоугольник А на место В
+        // Drag rectangle А on place of В
         $("#column-a").dragAndDropTo($("#column-b"));
         sleep(300);
-        // - Проверьте, что прямоугольники действительно поменялись
+        // Check that rectangles have changed their places
         $("#column-a header").shouldHave(text("B"));
         $("#column-b header").shouldHave(text("A"));
     }

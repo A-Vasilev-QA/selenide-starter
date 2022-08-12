@@ -15,16 +15,16 @@ public class SoftAssertionsTest {
     public void paragraphCanBeFoundTest() {
         Configuration.browserSize = "1920x1080";
 
-        //Откройте страницу Selenide в Github
+        //Open Selenide page in Github
         open("https://github.com/selenide/selenide");
-        //Перейдите в раздел Wiki проекта
+        //Open project Wiki
         $("#wiki-tab").click();
-        //Убедитесь, что в списке страниц (Pages) есть страница SoftAssertions
+        //Check that pages list contains SoftAssertions
         //$$(".markdown-body ul li a").findBy(text("Soft assertions")).click();
         $(byText("Soft assertions")).click();
-        //Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
+        //Open page SoftAssertions, check that it contains JUnit5 code example
         $(byTagAndText("h4","3. Using JUnit5 extend test class:")).sibling(0).$("pre").
                 shouldBe(visible);
-        //Проверяем, что именно блок кода присутствует
+
     }
 }

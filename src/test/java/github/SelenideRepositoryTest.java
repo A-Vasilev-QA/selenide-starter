@@ -9,14 +9,13 @@ public class SelenideRepositoryTest {
 
     @Test
     void shouldFindSelenideAsFirstRepository(){
-        // открыть страницу github.com
+        // Open page github.com
         open("https://github.com");
-        // ввести в поле поиска selenide и нажать Enter
+        // Type selenide in search field and press Enter
         $("[data-test-selector=nav-search-input]").setValue("selenide").pressEnter();
-
-        // нажимаем на линк от первого результата поиска
+        // Click the first link in results
         $$("ul.repo-list li").first().$("a").click();
-        // check: в заголовке встречается selenide/selenide
+        // Check: header contains selenide/selenide
         $("h2").shouldHave(text("selenide / selenide"));
 
     }
